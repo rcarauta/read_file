@@ -1,4 +1,10 @@
 {
-	"name": "Renato",
-	"age": 30
+	"name" : "/home",
+	"comment": "Home",
+	"owner": "samples",
+	"version": "1",
+	"service" : "foo_start_server:execute",
+	"url": "/home",
+	"type": "GET",
+	"lang" : "erlang"
 }
