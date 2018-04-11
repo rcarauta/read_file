@@ -7,7 +7,12 @@
                   kernel,
                   stdlib,
                   ibrowse,
-                  jiffy
+                  crypto,
+                  ssl,
+                  ranch,
+				  cowlib,
+                  jiffy,
+				  cowboy
                  ]},
   {mod, { foo_app, []}},
   {env, []}
