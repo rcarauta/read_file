@@ -25,10 +25,11 @@ stop(_State) ->
 path_router(Route) -> 
 	Dispatch = cowboy_router:compile([
 		{'_', [
-			{Route, foo_handler, []}
+			{Route, foo_handler, []},
+			{"/test",foo_start_handler,[]}
 		]}
 	]),
-	io:format("Route  ~p  ~n~n",[Route]),
+	
 	{ok, _} = cowboy:start_clear(http, [{port, 8080}], #{
 		env => #{dispatch => Dispatch}
 	}).
