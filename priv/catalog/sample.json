@@ -1,0 +1,10 @@
+{
+	"name" : "/sample",
+	"comment": "Sample",
+	"owner": "sample",
+	"version": "1",
+	"service" : "foo_sample_handler",
+	"url": "/sample",
+	"type": "GET",
+	"lang" : "erlang"
+}
