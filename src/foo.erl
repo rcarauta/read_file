@@ -12,3 +12,4 @@ start() ->
     application:start(cowlib),
 	application:start(cowboy),
 	application:start(foo).
+	
