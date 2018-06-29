@@ -1,0 +1,10 @@
+{
+  "name" : "/permission",
+  "comment": "Permission on this person",
+  "owner": "permission",
+  "version": "1",
+  "service" : "foo_permission_handler",
+  "url": "/permission",
+  "type": "GET",
+  "lang" : "erlang"
+}

@@ -1,9 +1,9 @@
--module(foo_sample_handler).
+-module(foo_permission_handler).
 
 -export([init/2,terminate/3]).
 
 init(Req0, State) ->
-	CryptText = foo_start_handler:crypt_content("{\"other\": \"Other text encypt!\"}"),
+	CryptText = foo_start_handler:crypt_content("{\"permission\": \"Permissions on this service!\"}"),
 
 	Req = cowboy_req:reply(200, #{
 		<<"content-type">> => <<"application/json">>

@@ -1,0 +1,10 @@
+{
+  "name" : "/correios",
+  "comment": "Consulta dos correios",
+  "owner": "correios",
+  "version": "1",
+  "service" : "foo_correios_handler",
+  "url": "/correios",
+  "type": "GET",
+  "lang" : "erlang"
+}
