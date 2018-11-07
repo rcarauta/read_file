@@ -6,8 +6,7 @@
 decode(Json) -> 
 	Json2 = iolist_to_binary(Json),
 	jiffy:decode(Json2).
-	
-	
+		
 encode(Doc) ->
 	jiffy:encode(Doc).
 	

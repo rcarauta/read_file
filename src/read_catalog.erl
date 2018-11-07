@@ -18,11 +18,12 @@ read_json(FileNames) ->
 	read_json(FileNames,[]).
 	
 read_json([PathFile | T], Acc) ->
-	ContentFile = foo_json_compile:readlines(string:concat("/home/renato/Downloads/erlang/read_file/priv/catalog/",PathFile)),
+	ContentFile = foo_json_compile:readlines(string:concat("/home/rcarauta/desenvolvimento/erlang/read_file/priv/catalog/",PathFile)),
 	{DecodeContent} = foo_json_compile:decode(ContentFile),
 	 UrlPath = proplists:get_value(<<"url">>, DecodeContent),
 	 Service = proplists:get_value(<<"service">>, DecodeContent),
-	 Router = foo_app:create_path(binary_to_list(UrlPath),list_to_atom(binary_to_list(Service))),
+	 RequestMethod = proplists:get_value(<<"type">>, DecodeContent),
+	 Router = foo_app:create_path(binary_to_list(UrlPath),list_to_atom(binary_to_list(Service)), RequestMethod),
 	 case Acc of
 		[] -> Path = Router;
 		_ -> Path =  Acc ++ Router
