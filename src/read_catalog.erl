@@ -18,7 +18,7 @@ read_json(FileNames) ->
 	read_json(FileNames,[]).
 	
 read_json([PathFile | T], Acc) ->
-	ContentFile = foo_json_compile:readlines(string:concat("/home/rcarauta/desenvolvimento/erlang/read_file/priv/catalog/",PathFile)),
+	ContentFile = foo_json_compile:readlines(string:concat("priv/catalog/",PathFile)),
 	{DecodeContent} = foo_json_compile:decode(ContentFile),
 	 UrlPath = proplists:get_value(<<"url">>, DecodeContent),
 	 Service = proplists:get_value(<<"service">>, DecodeContent),
