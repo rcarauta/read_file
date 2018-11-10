@@ -1,11 +1,11 @@
 -module(barramento_service).
 
--include("barramento_constaints.hrl").
+-include("barramento_constants.hrl").
 
 -export([start/1, stop/1, handle_function/2]).
 
 start(Port) ->
-    thrift_socket_server:start([{handle, ?MODULE},
+    thrift_socket_server:start([{handler, ?MODULE},
                                 {port, Port},
                                 {service, barramentoService_thrift},
                                 {name, barramentoService_thrift}]).
