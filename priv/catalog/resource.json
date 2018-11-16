@@ -1,0 +1,10 @@
+{
+	"name" : "/resource",
+	"comment": "Home",
+	"owner": "samples",
+	"version": "1",
+	"service" : "oauth2_example_resource",
+	"url": "/resource",
+	"type": "GET",
+	"lang" : "erlang"
+}

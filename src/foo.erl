@@ -11,5 +11,6 @@ start() ->
 	application:start(ranch),
     application:start(cowlib),
 	application:start(cowboy),
+	application:start(oauth2),
 	application:start(foo).
 	

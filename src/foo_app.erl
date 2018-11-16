@@ -18,12 +18,14 @@ start(_StartType, _StartArgs) ->
 	database_connection:start_mnesia(),
 	logger:logger_format("Started mnesia ...."),
 	start_mnesia_tables(),
+	io:format("Authneticated ~n"),
     foo_sup:start_link().
     
 
 stop(_State) ->
 	logger:logger_format("Stoping services ..."),
     ok.
+
 
 start_mnesia_tables() -> 
 	database_connection:create_all_tables().    

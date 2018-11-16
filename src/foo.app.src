@@ -12,7 +12,8 @@
                   ranch,
 				  cowlib,
                   jiffy,
-				  cowboy
+				  cowboy,
+                  oauth2
                  ]},
   {mod, { foo_app, []}},
   {env, []}
