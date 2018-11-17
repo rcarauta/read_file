@@ -3,7 +3,7 @@
 	"comment": "Home",
 	"owner": "samples",
 	"version": "1",
-	"service" : "oauth2_example_resource",
+	"service" : "oauth2_barramento_resource",
 	"url": "/resource",
 	"type": "GET",
 	"lang" : "erlang"
