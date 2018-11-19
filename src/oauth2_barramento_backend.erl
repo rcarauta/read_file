@@ -11,7 +11,7 @@
 -record(client,{
     client_id :: binary(),
     client_secret :: binary(),
-    client_url :: binary()
+    redirect_uri :: binary()
 }).
 
 -record(user, {
@@ -50,7 +50,7 @@ delete_user(Username) ->
     delete(?USER_TABLE, Username).
 
 
-add_client(Id, Sercret, RedirectUri) ->
+add_client(Id, Secret, RedirectUri) ->
     put(?CLIENT_TABLE, Id, #client{client_id = Id,
                                    client_secret = Secret,
                                    redirect_uri = RedirectUri}).
@@ -149,11 +149,20 @@ get_redirection_uri(ClientId, _) ->
     end.
 
 
+verify_redirection_uri(ClientId, ClientUri, _) ->
+    case get(?CLIENT_TABLE, ClientId) of
+        {ok, #client{redirect_uri = RedirUri}} when ClientUri =:= RedirUri ->
+            {ok, RedirUri};
+        _Error ->
+            {error, mismatch}
+    end.
+
+
 verify_client_scope(_ClientId, Scope, _) ->
     {ok, Scope}.
 
 
-veriry_resowner_scope(_ResOwner, Scope, _) ->
+verify_resowner_scope(_ResOwner, Scope, _) ->
     {ok, Scope}.
 
 
