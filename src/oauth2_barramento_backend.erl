@@ -1,5 +1,7 @@
 -module(oauth2_barramento_backend).
 
+-include("tables.hrl").
+
 -export([start/0, stop/0, add_user/2, delete_user/1, add_client/2, add_client/3,
         delete_client/1, authenticate_username_password/3,  authenticate_client/3,
         get_client_identity/2, associate_access_code/3, associate_refresh_token/3, associate_access_token/3,
@@ -8,30 +10,17 @@
         verify_client_scope/3, verify_resowner_scope/3, verify_scope/3]).
 
 
--record(client,{
-    client_id :: binary(),
-    client_secret :: binary(),
-    redirect_uri :: binary()
-}).
-
--record(user, {
-    username :: binary(),
-    password :: binary()
-}).
-
 -define(ACCESS_TOKEN_TABLE, access_tokens).
 -define(REFRESH_TOKEN_TABLE, refresh_tokens).
--define(USER_TABLE, users).
--define(CLIENT_TABLE, clients).
+-define(USER_TABLE, user).
+-define(CLIENT_TABLE, client).
 
 -define(TABLES, [?ACCESS_TOKEN_TABLE,
-                 ?REFRESH_TOKEN_TABLE,
-                 ?USER_TABLE,
-                 ?CLIENT_TABLE]).
+                 ?REFRESH_TOKEN_TABLE]).
 
 start() ->
     lists:foreach(fun(Table) ->
-                    ets:new(Table,[named_title, public])
+                    ets:new(Table,[named_table, public])
                   end, ?TABLES),
         oauth2_barramento_backend:add_client(<<"my_client">>,<<"ohai">>, 
                                     <<"https://kirva.com">>),

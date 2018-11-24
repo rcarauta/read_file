@@ -16,8 +16,9 @@ start(_StartType, _StartArgs) ->
 	database_connection:start(),
 	logger:logger_format("Connection can be started ..."),
 	database_connection:start_mnesia(),
-	logger:logger_format("Started mnesia ...."),
 	start_mnesia_tables(),
+	logger:logger_format("Started mnesia ...."),
+	oauth2_barramento_backend:start(),
 	io:format("Authneticated ~n"),
     foo_sup:start_link().
     
@@ -37,7 +38,7 @@ create_path(Path, Service, RequestMethod) ->
 
 
 path_router(Route) -> 
-	Dispatch = cowboy_router:compile([{'_', Route}]),	
+	Dispatch = cowboy_router:compile([{'_', Route}]),
 	{ok, _} = cowboy:start_clear(http, [{port, 8081}], #{
 		env => #{dispatch => Dispatch}
 	}).

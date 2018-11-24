@@ -4,30 +4,36 @@
         content_types_accepted/2, process_post/2, process_get/2]).
 
 init(_Transport, _Req, _Opts) ->
-    {ok, auth_form} = erlydtl:compile(filename:join(["priv", "static", "auth_from.dtl"]),
+    io:format("Entrou aqui init >>>>>>>>>>>>>>>>>>>"),
+    {ok, auth_form} = erlydtl:compile(filename:join(["priv", "static", "auth_form.dtl"]),
                                 auth_form),
     {upgrade, protocol, cowboy_rest}.
 
 
 rest_init(Req, _Opts) ->
+    io:format("Entrou aqui rest_init >>>>>>>>>>>>>>>>>>>"),
     {ok, Req, undefined_state}.
 
 
 allowed_methods(Req, State) ->
+     io:format("Entrou aqui allowed_methods >>>>>>>>>>>>>>>>>>>"),
     {[<<"POST">>, <<"GET">>], Req, State}.
 
 
 content_types_provided(Req, State) ->
+    io:format("Entrou aqui content_types_provided >>>>>>>>>>>>>>>>>>>"),
     {[{{<<"text">>, <<"html">>, []}, process_get}], Req, State}.
 
 
 content_types_accepted(Req, State) ->
+    io:format("Entrou aqui content_types_accepted >>>>>>>>>>>>>>>>>>>"),
     {[{{<<"application">>, <<"json">>, []}, process_post},
     {{<<"application">>, <<"x-www-form-urlencoded">>, []}, process_post}],
     Req, State}.
 
 
 process_post(Req, State) ->
+    io:format("Entrou aqui proccess_post >>>>>>>>>>>>>>>>>>>"),
     {ok, Body, Req2} = cowboy_req:body(Req),
     Params = decode_form(Body),
     {ok, Reply} =
@@ -46,6 +52,7 @@ process_post(Req, State) ->
 
 
 process_get(Req, State) ->
+    io:format("Entrou aqui process_get >>>>>>>>>>>>>>>>>>>"),
     {ResponseType, Req2} = cowboy_req:qs_val(<<"response_type">>, Req),
     {ok, Reply} =
         case ResponseType of 

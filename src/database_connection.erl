@@ -20,7 +20,9 @@ start_mnesia() ->
     mnesia:start().
 
 create_all_tables() ->
-    mnesia:create_table(employee,[{attributes, record_info(fields, employee)}]).
+    mnesia:create_table(employee,[{attributes, record_info(fields, employee)}]),
+	mnesia:create_table(user,[{attributes, record_info(fields, user)}]),
+	mnesia:create_table(client,[{attributes, record_info(fields, client)}]).
 
 
 insert(Record) ->
