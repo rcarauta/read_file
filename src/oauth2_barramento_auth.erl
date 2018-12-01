@@ -1,39 +1,38 @@
 -module(oauth2_barramento_auth).
 
--export([init/3, rest_init/2, allowed_methods/2, content_types_provided/2,
+-export([init/2, rest_init/2, allowed_methods/2, content_types_provided/2,
         content_types_accepted/2, process_post/2, process_get/2]).
 
-init(_Transport, _Req, _Opts) ->
-    io:format("Entrou aqui init >>>>>>>>>>>>>>>>>>>"),
+init(_Transport, _Req) ->
     {ok, auth_form} = erlydtl:compile(filename:join(["priv", "static", "auth_form.dtl"]),
-                                auth_form),
+                                auth_form,[{out_dir,"priv"}]),                                              
     {upgrade, protocol, cowboy_rest}.
 
 
 rest_init(Req, _Opts) ->
-    io:format("Entrou aqui rest_init >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method rest_init >>>>>>>>>>>> ~n~n"),
     {ok, Req, undefined_state}.
 
 
 allowed_methods(Req, State) ->
-     io:format("Entrou aqui allowed_methods >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method allowed_methods >>>>>>>>>>>> ~n~n"),
     {[<<"POST">>, <<"GET">>], Req, State}.
 
 
 content_types_provided(Req, State) ->
-    io:format("Entrou aqui content_types_provided >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method content_types_provided >>>>>>>>>>>> ~n~n"),
     {[{{<<"text">>, <<"html">>, []}, process_get}], Req, State}.
 
 
 content_types_accepted(Req, State) ->
-    io:format("Entrou aqui content_types_accepted >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method content_types_accepted >>>>>>>>>>>> ~n~n"),
     {[{{<<"application">>, <<"json">>, []}, process_post},
     {{<<"application">>, <<"x-www-form-urlencoded">>, []}, process_post}],
     Req, State}.
 
 
 process_post(Req, State) ->
-    io:format("Entrou aqui proccess_post >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method process_post >>>>>>>>>>>> ~n~n"),
     {ok, Body, Req2} = cowboy_req:body(Req),
     Params = decode_form(Body),
     {ok, Reply} =
@@ -52,7 +51,7 @@ process_post(Req, State) ->
 
 
 process_get(Req, State) ->
-    io:format("Entrou aqui process_get >>>>>>>>>>>>>>>>>>>"),
+    io:format("Method process_get >>>>>>>>>>>> ~n~n"),
     {ResponseType, Req2} = cowboy_req:qs_val(<<"response_type">>, Req),
     {ok, Reply} =
         case ResponseType of 
